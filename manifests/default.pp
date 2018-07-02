@@ -46,3 +46,12 @@ file { '/home/vagrant/.gdbinit':
   content => template('manifests/home/vagrant/.gdbinit'),
 }
 
+# peda
+exec { 'peda-clone':
+  path    => ['/usr/bin'],
+  command => 'git clone --depth 1 https://github.com/longld/peda.git',
+  cwd     => '/usr/local/src',
+  creates => '/usr/local/src/peda',
+  require => Package['git'],
+}
+
